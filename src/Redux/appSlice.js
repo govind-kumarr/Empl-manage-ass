@@ -11,11 +11,14 @@ const initialState = {
 export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
   console.log(cred, "cred");
   try {
-    const response = await fetch("http://localhost:8080/users/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(cred),
-    });
+    const response = await fetch(
+      "https://odd-puce-hatchling-ring.cyclic.app/users/login",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(cred),
+      }
+    );
     console.log(response, "admin login response");
     const data = await response.json();
     console.log(data, "admin login data");
@@ -61,7 +64,7 @@ export const deleteEmployee = createAsyncThunk(
 
 export const getEmployee = createAsyncThunk("app/getEmployee", async () => {
   try {
-    const response = await fetch("http://localhost:8080/employees");
+    const response = await fetch(url);
     // console.log(response, "response");
     const employees = await response.json();
     // console.log(employees);
