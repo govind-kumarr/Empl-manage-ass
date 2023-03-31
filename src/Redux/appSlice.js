@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
-  console.log(cred, "cred");
+  // console.log(cred, "cred");
   try {
     const response = await fetch(
       "https://odd-puce-hatchling-ring.cyclic.app/users/login",
@@ -19,9 +19,8 @@ export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
         body: JSON.stringify(cred),
       }
     );
-    console.log(response, "admin login response");
     const data = await response.json();
-    console.log(data, "admin login data");
+    // console.log(data, "admin login data");
     return data;
   } catch (error) {
     console.log("Error whle admin login", error);
@@ -39,7 +38,7 @@ export const addEmployee = createAsyncThunk(
       });
       thunkApi.dispatch(getEmployee());
       // const data = await response.json();
-      console.log(response);
+      // console.log(response);
       // return data;
     } catch (error) {
       console.log(error);
@@ -105,7 +104,7 @@ const appSlice = createSlice({
       })
       .addCase(adminLogin.pending, (state) => {})
       .addCase(adminLogin.fulfilled, (state, action) => {
-        console.log(action, "action obj for adminlogin");
+        // console.log(action, "action obj for adminlogin");
         if (action?.payload?.token) state.user = "admin";
       });
   },

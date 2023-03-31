@@ -18,8 +18,8 @@ export const UserLogin = () => {
   const { user } = useSelector((state) => state);
 
   useEffect(() => {
-    console.log();
-    if (user) navigate("/dashboard");
+    // console.log("use effect called with user: " + user);
+    if (user != null) navigate("/dashboard");
   }, [user]);
 
   const {
@@ -34,7 +34,7 @@ export const UserLogin = () => {
     initialValues,
     validationSchema: userLoginSchema,
     onSubmit: (values) => {
-      console.log(values, "values");
+      // console.log(values, "values");
       dispatch(adminLogin(values));
       resetForm();
     },
