@@ -9,6 +9,7 @@ const initialState = {
 };
 
 export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
+  console.log(cred, "cred");
   try {
     const response = await fetch("http://localhost:8080/users/login", {
       method: "POST",
