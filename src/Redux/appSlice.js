@@ -1,24 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { url } from "../App";
+import { authUrl, url } from "../App";
 
 const initialState = {
   user: null,
   employees: [],
   isLoading: false,
   isError: false,
+  token: null,
 };
 
 export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
   // console.log(cred, "cred");
   try {
-    const response = await fetch(
-      "https://odd-puce-hatchling-ring.cyclic.app/users/login",
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(cred),
-      }
-    );
+    const response = await fetch(authUrl, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(cred),
+    });
     const data = await response.json();
     // console.log(data, "admin login data");
     return data;
@@ -31,15 +29,15 @@ export const addEmployee = createAsyncThunk(
   "app/addEmployee",
   async (employee, thunkApi) => {
     try {
-      const response = await fetch(url, {
+      await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          token: thunkApi.state.token,
+        },
         body: JSON.stringify(employee),
       });
-      thunkApi.dispatch(getEmployee());
-      // const data = await response.json();
-      // console.log(response);
-      // return data;
+      thunkApi.dispatch(getEmployees());
     } catch (error) {
       console.log(error);
     }
@@ -61,17 +59,24 @@ export const deleteEmployee = createAsyncThunk(
   }
 );
 
-export const getEmployee = createAsyncThunk("app/getEmployee", async () => {
-  try {
-    const response = await fetch(url);
-    // console.log(response, "response");
-    const employees = await response.json();
-    // console.log(employees);
-    return employees;
-  } catch (error) {
-    console.log("Error fetching employee", error);
+export const getEmployees = createAsyncThunk(
+  "app/getEmployees",
+  async (_, thunkApi) => {
+    const state = thunkApi.getState();
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          token: state.token,
+        },
+      });
+      const employees = await response.json();
+      return employees;
+    } catch (error) {
+      console.log("Error fetching employee", error);
+    }
   }
-});
+);
 
 const appSlice = createSlice({
   name: "app",
@@ -89,23 +94,24 @@ const appSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
       })
-      .addCase(getEmployee.pending, (state) => {
+      .addCase(getEmployees.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getEmployee.rejected, (state) => {
+      .addCase(getEmployees.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       })
-      .addCase(getEmployee.fulfilled, (state, action) => {
-        // console.log(action, "getemployees fullfilled");
+      .addCase(getEmployees.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.employees = action.payload;
       })
       .addCase(adminLogin.pending, (state) => {})
       .addCase(adminLogin.fulfilled, (state, action) => {
-        // console.log(action, "action obj for adminlogin");
-        if (action?.payload?.token) state.user = "admin";
+        if (action?.payload?.token) {
+          state.user = "admin";
+          state.token = action.payload.token;
+        }
       });
   },
 });

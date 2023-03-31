@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { getEmployee } from "../Redux/appSlice";
+import { getEmployees } from "../Redux/appSlice";
 import { EmployeeRow } from "./EmployeeRow";
+import { EmployeeTable } from "./EmployeeTable";
 
 export const EmployeesList = () => {
   const dispatch = useDispatch();
@@ -10,39 +11,13 @@ export const EmployeesList = () => {
   const { employees, isLoading, isError } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getEmployee());
+    dispatch(getEmployees());
   }, []);
 
-  // console.log(employees, "Employees loaded");
   return (
     <EmployeeList>
       <h1 className="section_heading">All Employees</h1>
-      <section className="section_employees">
-        <table className="employees_table">
-          <thead>
-            <tr>
-              <th>Employee Id</th>
-              <th>Employee Name</th>
-              <th>Date of Joining</th>
-              <th>Designation</th>
-              <th>show</th>
-              <th>edit</th>
-              <th>delete</th>
-            </tr>
-          </thead>
-
-          <tbody className="table_body">
-            {employees.length > 0 &&
-              employees.map((employee, index) => (
-                <EmployeeRow
-                  key={employee._id}
-                  employee={employee}
-                  index={index}
-                />
-              ))}
-          </tbody>
-        </table>
-      </section>
+      <EmployeeTable employees={employees} />
     </EmployeeList>
   );
 };
