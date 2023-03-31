@@ -16,10 +16,13 @@ export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(cred),
     });
+    console.log(response, "admin login response");
     const data = await response.json();
     console.log(data, "admin login data");
     return data;
-  } catch (error) {}
+  } catch (error) {
+    console.log("Error whle admin login", error);
+  }
 });
 
 export const addEmployee = createAsyncThunk(
@@ -100,7 +103,7 @@ const appSlice = createSlice({
       .addCase(adminLogin.pending, (state) => {})
       .addCase(adminLogin.fulfilled, (state, action) => {
         console.log(action, "action obj for adminlogin");
-        if (action.payload.token) state.user = "admin";
+        if (action?.payload?.token) state.user = "admin";
       });
   },
 });

@@ -9,5 +9,5 @@ function App() {
   );
 }
 
-export const url = "http://localhost:8080/employees";
+export const url = "https://odd-puce-hatchling-ring.cyclic.app/employees";
 export default App;
