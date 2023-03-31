@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+:root {
+  --first-color: #d61355;
+  --second-color: #f94a29;
+  ---thirdcolor: #fce22a;
+  --fourth-color: #30e3df;
+  --fourth-color-lite: #24aaa7;
+
+}
+
+.btn {
+  text-transform: uppercase;
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
