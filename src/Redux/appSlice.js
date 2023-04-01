@@ -28,12 +28,13 @@ export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
 export const addEmployee = createAsyncThunk(
   "app/addEmployee",
   async (employee, thunkApi) => {
+    const state = thunkApi.getState();
     try {
       await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          token: thunkApi.state.token,
+          token: state.token,
         },
         body: JSON.stringify(employee),
       });
@@ -74,6 +75,28 @@ export const getEmployees = createAsyncThunk(
       return employees;
     } catch (error) {
       console.log("Error fetching employee", error);
+    }
+  }
+);
+
+export const getEmploymentData = createAsyncThunk(
+  "app/getEmploymentData",
+  async (emp_id, thunkApi) => {
+    const state = thunkApi.getState();
+    try {
+      const response = await fetch(
+        `http://localhost:8080/prev_empl/${emp_id}`,
+        {
+          headers: {
+            token: state.token,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log("Prev Emp Data", data);
+      return data;
+    } catch (error) {
+      console.log("Error fetching previous employment data", error);
     }
   }
 );

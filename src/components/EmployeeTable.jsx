@@ -107,7 +107,13 @@ export const EmployeeTable = ({ employees }) => {
             {employees
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((employee, index) => {
-                return <EmployeeRow employee={employee} index={index} />;
+                return (
+                  <EmployeeRow
+                    key={employee._id}
+                    employee={employee}
+                    index={index}
+                  />
+                );
               })}
           </TableBody>
         </Table>

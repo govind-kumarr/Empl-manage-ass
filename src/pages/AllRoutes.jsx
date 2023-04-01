@@ -17,9 +17,11 @@ export const AllRoutes = () => {
           element={token && user ? <Dashboard /> : <Navigate to="/" />}
         />
         <Route
-          path="/employee/:id"
+          path="/employee/:emp_id"
           element={
-            token && user ? <EmployeePage /> : <Navigate to="/dashboard" />
+            // token && user ?
+            <EmployeePage />
+            //  : <Navigate to="/dashboard" />
           }
         />
       </Routes>

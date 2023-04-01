@@ -50,7 +50,6 @@ export const UserLogin = () => {
     initialValues,
     validationSchema: userLoginSchema,
     onSubmit: (values) => {
-      handleOpen();
       dispatch(adminLogin(values));
     },
   });
@@ -112,10 +111,10 @@ export const UserLogin = () => {
 };
 
 const UserLoginForm = styled.div`
-  max-width: 1200px;
+  max-width: 500px;
   margin: auto;
   .section_heading {
-    margin: auto;
+    margin: 10px auto;
     text-transform: capitalize;
     text-align: center;
   }
@@ -132,7 +131,7 @@ const UserLoginForm = styled.div`
   }
   .form-center {
     width: 90%;
-    max-width: 800px;
+    max-width: 500px;
     margin: auto;
   }
 `;
