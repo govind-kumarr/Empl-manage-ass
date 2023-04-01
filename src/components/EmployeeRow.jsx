@@ -16,10 +16,30 @@ export const EmployeeRow = ({ employee, index }) => {
   };
   return (
     <TableRow role="checkbox" tabIndex={-1}>
-      <TableCell align="center">{emp_id}</TableCell>
-      <TableCell align="center">{name}</TableCell>
-      <TableCell align="center">{date_of_joining}</TableCell>
-      <TableCell align="center">{designation}</TableCell>
+      <TableCell
+        align="center"
+        sx={{ fontSize: "medium", textTransform: "capitalize" }}
+      >
+        {emp_id}
+      </TableCell>
+      <TableCell
+        align="center"
+        sx={{ fontSize: "medium", textTransform: "capitalize" }}
+      >
+        {name}
+      </TableCell>
+      <TableCell
+        align="center"
+        sx={{ fontSize: "medium", textTransform: "capitalize" }}
+      >
+        {date_of_joining}
+      </TableCell>
+      <TableCell
+        align="center"
+        sx={{ fontSize: "medium", textTransform: "capitalize" }}
+      >
+        {designation}
+      </TableCell>
       <TableCell align="center">
         <Button
           variant="outlined"

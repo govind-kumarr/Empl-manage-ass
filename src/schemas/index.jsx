@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const registerSchema = Yup.object({
   emp_id: Yup.string()
     .min(4)
-    .max(15)
+    .max(4)
     .required("Please Enter a valid Employee Id"),
   name: Yup.string().min(4).max(25).required("Please Enter your name"),
   date_of_joining: Yup.date()
@@ -15,7 +15,7 @@ export const registerSchema = Yup.object({
 export const userLoginSchema = Yup.object({
   username: Yup.string().min(4).max(25).required("Please Enter your username"),
   password: Yup.string()
-    .min(6)
+    .min(5)
     .max(25)
-    .required("Password must be at least 6 characters"),
+    .required("Password must be at least 5 characters"),
 });

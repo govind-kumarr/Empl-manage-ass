@@ -13,7 +13,7 @@ const columns = [
   {
     id: "emp_id",
     label: "Employee Id",
-    minWidth: 170,
+    minWidth: 100,
     align: "center",
     // format: (value) => value.toFixed(2),
   },
@@ -83,7 +83,7 @@ export const EmployeeTable = ({ employees }) => {
         overflow: "hidden",
       }}
     >
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 440, width: "100%" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -93,7 +93,7 @@ export const EmployeeTable = ({ employees }) => {
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
-                    backgroundColor: "var(--fourth-color)",
+                    backgroundColor: "var(--primary-color)",
                     fontWeight: "bold",
                     color: "white",
                   }}

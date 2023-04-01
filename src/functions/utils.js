@@ -2,6 +2,7 @@ export const getPrevEmpData = async (emp_id, token, cb) => {
   try {
     const response = await fetch(`http://localhost:8080/prev_empl/${emp_id}`, {
       headers: {
+        "Content-Type": "application/json",
         token,
       },
     });

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { DashboardHeader } from "../components/DashboardHeader";
 import { EmployeesList } from "../components/EmployeesList";
-import { RegisterEmployee } from "./RegisterEmployee";
+import { RegisterEmployee } from "../components/RegisterEmployee";
 
 export const comps = {
-  register: '"registerEmployee"',
+  register: "registerEmployee",
   employees: "employeeTable",
   desChart: "designationChart",
   totalEmp: "totalEmployees",

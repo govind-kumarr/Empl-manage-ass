@@ -7,6 +7,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   token: null,
+  edit: false,
 };
 
 export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {

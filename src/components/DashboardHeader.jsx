@@ -45,8 +45,9 @@ export const DashboardHeader = ({ setShow, show }) => {
 const DashHeader = styled.div`
   max-width: 1200px;
   margin: auto;
-  border: 1px solid black;
+  border: 3px solid #1565c0;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
+  margin: 1rem auto;
 `;

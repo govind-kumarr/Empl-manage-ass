@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard } from "./Dashboard";
-import { RegisterEmployee } from "./RegisterEmployee";
+import { RegisterEmployee } from "../components/RegisterEmployee";
 import { UserLogin } from "./UserLogin";
 import { useSelector } from "react-redux";
-import { EmployeePage } from "../components/EmployeePage";
+import { EmployeePage } from "./EmployeePage";
 
 export const AllRoutes = () => {
   const { token, user } = useSelector((state) => state);
