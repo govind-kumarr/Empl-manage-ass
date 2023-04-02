@@ -5,6 +5,7 @@ import { RegisterEmployee } from "../components/RegisterEmployee";
 import { UserLogin } from "./UserLogin";
 import { useSelector } from "react-redux";
 import { EmployeePage } from "./EmployeePage";
+import { AddPrevEmplForm } from "../components/AddPrevEmplForm";
 
 export const AllRoutes = () => {
   const { token, user } = useSelector((state) => state);
@@ -21,6 +22,14 @@ export const AllRoutes = () => {
           element={
             // token && user ?
             <EmployeePage />
+            //  : <Navigate to="/dashboard" />
+          }
+        />
+        <Route
+          path="/employee/addPrevEmp/:emp_id"
+          element={
+            // token && user ?
+            <AddPrevEmplForm />
             //  : <Navigate to="/dashboard" />
           }
         />

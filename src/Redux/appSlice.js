@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { authUrl, url } from "../App";
+import { authUrl, baseUrl, url } from "../App";
 
 const initialState = {
   user: null,
@@ -9,6 +9,28 @@ const initialState = {
   token: null,
   edit: false,
 };
+
+export const addEmploymentData = createAsyncThunk(
+  "app/addEmploymentData",
+  async (data, thunkApi) => {
+    const { token } = thunkApi.getState();
+    try {
+      console.log(`${baseUrl}prev_empl/${data.emp_id}`);
+      console.log(token, "token");
+      let response = await fetch(`${baseUrl}prev_empl/${data.emp_id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify(data),
+      });
+      console.log("Added Data Successfully", response);
+    } catch (error) {
+      console.log("Error while Adding prev employment data", error);
+    }
+  }
+);
 
 export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
   // console.log(cred, "cred");
