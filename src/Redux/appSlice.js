@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authUrl, baseUrl, url } from "../App";
+import { getPrevEmpData } from "../functions/utils";
 
 const initialState = {
   user: null,
@@ -15,8 +16,8 @@ export const addEmploymentData = createAsyncThunk(
   async (data, thunkApi) => {
     const { token } = thunkApi.getState();
     try {
-      console.log(`${baseUrl}prev_empl/${data.emp_id}`);
-      console.log(token, "token");
+      // console.log(`${baseUrl}prev_empl/${data.emp_id}`);
+      // console.log(token, "token");
       let response = await fetch(`${baseUrl}prev_empl/${data.emp_id}`, {
         method: "POST",
         headers: {
@@ -25,9 +26,29 @@ export const addEmploymentData = createAsyncThunk(
         },
         body: JSON.stringify(data),
       });
-      console.log("Added Data Successfully", response);
+      // console.log("Added Data Successfully", response);
     } catch (error) {
       console.log("Error while Adding prev employment data", error);
+    }
+  }
+);
+export const deleteEmploymentData = createAsyncThunk(
+  "app/deleteEmploymentData",
+  async (data, thunkApi) => {
+    const { token } = thunkApi.getState();
+    const { id, cb, emp_id } = data;
+    try {
+      let response = await fetch(`${baseUrl}prev_empl/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+      });
+      getPrevEmpData(emp_id, token, cb);
+      // console.log("Delete Data Successfully", response);
+    } catch (error) {
+      console.log("Error while Deleting prev employment data", error);
     }
   }
 );
@@ -44,7 +65,7 @@ export const adminLogin = createAsyncThunk("app/adminLogin", async (cred) => {
     // console.log(data, "admin login data");
     return data;
   } catch (error) {
-    console.log("Error whle admin login", error);
+    console.log("Error while admin login", error);
   }
 });
 
@@ -71,12 +92,16 @@ export const addEmployee = createAsyncThunk(
 export const deleteEmployee = createAsyncThunk(
   "app/deleteEmployee",
   async (id, thunkApi) => {
+    const { token } = thunkApi.getState();
     try {
       const response = await fetch(`${url}/${id}`, {
         method: "DELETE",
+        headers: {
+          token,
+        },
       });
-      thunkApi.dispatch(getEmployee());
-      console.log(response);
+      thunkApi.dispatch(getEmployees());
+      // console.log(response);
     } catch (error) {
       console.log("Error while deleting employee", error);
     }
@@ -97,7 +122,7 @@ export const getEmployees = createAsyncThunk(
       const employees = await response.json();
       return employees;
     } catch (error) {
-      console.log("Error fetching employee", error);
+      // console.log("Error fetching employee", error);
     }
   }
 );
@@ -116,10 +141,32 @@ export const getEmploymentData = createAsyncThunk(
         }
       );
       const data = await response.json();
-      console.log("Prev Emp Data", data);
+      // console.log("Prev Emp Data", data);
       return data;
     } catch (error) {
       console.log("Error fetching previous employment data", error);
+    }
+  }
+);
+
+export const updateEmployeeData = createAsyncThunk(
+  "app/updateEmployeeData",
+  async (data, thunkApi) => {
+    const state = thunkApi.getState();
+    const { _id } = data;
+    try {
+      const response = await fetch(`${url}/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          token: state.token,
+        },
+        body: JSON.stringify(data),
+      });
+      // console.log("Updated Data", await response.json());
+      return data;
+    } catch (error) {
+      console.log("Error fetching Updating Data", error);
     }
   }
 );

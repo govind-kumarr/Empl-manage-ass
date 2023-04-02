@@ -51,12 +51,24 @@ export const EmployeeRow = ({ employee, index }) => {
         </Button>
       </TableCell>
       <TableCell align="center">
-        <Button variant="outlined" color="warning" startIcon={<EditIcon />}>
+        <Button
+          variant="outlined"
+          color="warning"
+          startIcon={<EditIcon />}
+          onClick={() =>
+            navigate(`/employee/edit/${emp_id}`, { state: employee })
+          }
+        >
           Edit
         </Button>
       </TableCell>
       <TableCell align="center">
-        <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
+        <Button
+          variant="outlined"
+          color="error"
+          startIcon={<DeleteIcon />}
+          onClick={() => dispatch(deleteEmployee(_id))}
+        >
           Delete
         </Button>
       </TableCell>

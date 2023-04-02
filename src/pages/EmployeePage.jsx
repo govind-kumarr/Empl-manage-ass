@@ -11,6 +11,7 @@ import { EmployeePageHeader } from "../components/EmployeePageHeader";
 export const EmployeePage = () => {
   const { emp_id } = useParams();
   const data = useLocation().state;
+  // console.log(data, emp_id);
   return (
     <Employee>
       <EmployeePageHeader emp_id={emp_id} employee={data} />

@@ -6,6 +6,7 @@ import { UserLogin } from "./UserLogin";
 import { useSelector } from "react-redux";
 import { EmployeePage } from "./EmployeePage";
 import { AddPrevEmplForm } from "../components/AddPrevEmplForm";
+import { EditEmployee } from "./EditEmployee";
 
 export const AllRoutes = () => {
   const { token, user } = useSelector((state) => state);
@@ -20,17 +21,19 @@ export const AllRoutes = () => {
         <Route
           path="/employee/:emp_id"
           element={
-            // token && user ?
-            <EmployeePage />
-            //  : <Navigate to="/dashboard" />
+            token && user ? <EmployeePage /> : <Navigate to="/dashboard" />
           }
         />
         <Route
           path="/employee/addPrevEmp/:emp_id"
           element={
-            // token && user ?
-            <AddPrevEmplForm />
-            //  : <Navigate to="/dashboard" />
+            token && user ? <AddPrevEmplForm /> : <Navigate to="/dashboard" />
+          }
+        />
+        <Route
+          path="/employee/edit/:emp_id"
+          element={
+            token && user ? <EditEmployee /> : <Navigate to="/dashboard" />
           }
         />
       </Routes>

@@ -7,10 +7,12 @@ export const getPrevEmpData = async (emp_id, token, cb) => {
       },
     });
     const data = await response.json();
-    console.log("Prev Emp Data", data);
+    // console.log("Prev Emp Data", data);
     cb(data);
     return data;
   } catch (error) {
     console.log("Error fetching previous employment data", error);
   }
 };
+
+

@@ -18,18 +18,17 @@ const initialValues = {
 export const AddPrevEmplForm = () => {
   const { emp_id } = useParams();
   const dispatch = useDispatch();
-  // console.log(emp_id);
 
-  const { values, errors, touched, handleSubmit, handleChange } = useFormik({
-    initialValues,
-    validationSchema: addPrevEmplSchema,
-    onSubmit: (values) => {
-      // console.log(values);
-      let data = { ...values, emp_id };
-      console.log(data, "data");
-      dispatch(addEmploymentData(data));
-    },
-  });
+  const { values, errors, touched, handleSubmit, handleChange, resetForm } =
+    useFormik({
+      initialValues,
+      validationSchema: addPrevEmplSchema,
+      onSubmit: (values) => {
+        let data = { ...values, emp_id };
+        dispatch(addEmploymentData(data));
+        resetForm();
+      },
+    });
 
   return (
     <Box sx={{ maxWidth: "1200px", margin: "auto" }}>
@@ -107,6 +106,7 @@ export const AddPrevEmplForm = () => {
     </Box>
   );
 };
+
 const AddEmpl = styled.div`
   .form {
     display: flex;

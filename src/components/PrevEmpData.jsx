@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPrevEmpData } from "../functions/utils";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
 } from "@mui/material";
+import { deleteEmploymentData } from "../Redux/appSlice";
 
 const tableHeadStyles = {};
 export const PrevEmpData = ({ emp_id }) => {
+  const dispatch = useDispatch();
   const [prevEmp, setPrevEmp] = useState([]);
   const { token } = useSelector((state) => state);
   useEffect(() => {
@@ -85,6 +90,16 @@ export const PrevEmpData = ({ emp_id }) => {
           >
             To
           </TableCell>
+          <TableCell
+            sx={{
+              fontSize: "large",
+              backgroundColor: "var(--first-color)",
+              border: "1px solid white",
+              color: "white",
+            }}
+          >
+            Delete
+          </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -122,6 +137,24 @@ export const PrevEmpData = ({ emp_id }) => {
                   sx={{ fontSize: "larger", textTransform: "capitalize" }}
                 >
                   {to}
+                </TableCell>
+                <TableCell align="center">
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() =>
+                      dispatch(
+                        deleteEmploymentData({
+                          id: _id,
+                          emp_id,
+                          cb: setPrevEmp,
+                        })
+                      )
+                    }
+                  >
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             );

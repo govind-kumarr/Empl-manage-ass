@@ -24,7 +24,7 @@ export const DashboardHeader = ({ setShow, show }) => {
         variant={show == comps.totalEmp ? "contained" : "outlined"}
         onClick={() => setShow(comps.totalEmp)}
       >
-        Total Employees {employees?.length}
+        Total Employees ({employees?.length})
       </Button>
       <Button
         variant={show == comps.desChart ? "contained" : "outlined"}

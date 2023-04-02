@@ -3,8 +3,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 
-export const EmployeePageHeader = ({ emp_id }) => {
+export const EmployeePageHeader = ({ emp_id, employee }) => {
   const navigate = useNavigate();
+  // console.log(employee, "employee page header");
   return (
     <Box
       sx={{
@@ -29,7 +30,13 @@ export const EmployeePageHeader = ({ emp_id }) => {
       >
         Add Prev Employment
       </Button>
-      <Button variant="contained" startIcon={<EditIcon />}>
+      <Button
+        variant="contained"
+        startIcon={<EditIcon />}
+        onClick={() =>
+          navigate(`/employee/edit/${emp_id}`, { state: employee })
+        }
+      >
         Edit Employee
       </Button>
       <Button variant="contained" startIcon={<EditIcon />}>
