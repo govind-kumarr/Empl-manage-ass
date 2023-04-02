@@ -132,14 +132,11 @@ export const getEmploymentData = createAsyncThunk(
   async (emp_id, thunkApi) => {
     const state = thunkApi.getState();
     try {
-      const response = await fetch(
-        `http://localhost:8080/prev_empl/${emp_id}`,
-        {
-          headers: {
-            token: state.token,
-          },
-        }
-      );
+      const response = await fetch(`${baseUrl}prev_empl/${emp_id}`, {
+        headers: {
+          token: state.token,
+        },
+      });
       const data = await response.json();
       // console.log("Prev Emp Data", data);
       return data;
